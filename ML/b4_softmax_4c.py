@@ -20,7 +20,7 @@ import timm
 plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False
 
-# 단순 5개 클래스 정의
+# 4개 클래스 정의
 disease_classes = ['anthracnose', 'leaf_spot', 'mixed','virus']
 
 # 데이터셋 경로
@@ -37,7 +37,7 @@ def get_device():
     print(f"사용 디바이스: {device}")
     return device
 
-# 단순화된 데이터셋 클래스 
+# 데이터셋 클래스 
 class HierarchicalDataset(Dataset):
     def __init__(self, data_dir, transform=None):
         self.data_dir = data_dir
@@ -45,7 +45,7 @@ class HierarchicalDataset(Dataset):
         self.samples = []
         self.disease_to_idx = {disease: idx for idx, disease in enumerate(disease_classes)}
         
-        # 단순 데이터 로딩 (하위 폴더 제거)
+        # 데이터 로딩 (하위 폴더 제거)
         for disease in disease_classes:
             disease_path = os.path.join(data_dir, disease)
             if not os.path.exists(disease_path):
@@ -69,7 +69,7 @@ class HierarchicalDataset(Dataset):
             
         return image, disease_label, disease_name
 
-# 단순화된 EfficientNet 모델 
+# EfficientNet 모델 
 class EfficientNetModel(nn.Module):
     def __init__(self, num_diseases=3, pretrained=True):
         super(EfficientNetModel, self).__init__()
@@ -83,7 +83,7 @@ class EfficientNetModel(nn.Module):
             nn.Linear(feature_dim, 512),
             nn.ReLU(True),
             nn.Dropout(p=0.3),
-            nn.Linear(512, num_diseases)  # 4개 클래스 출력
+            nn.Linear(512, num_diseases)  # n개 클래스 출력
         )
     
     def forward(self, x):
@@ -149,7 +149,7 @@ def prepare_dataset():
     plot_dataset_distribution(class_counts)
     return classification_dir
 
-# 기존 시각화 함수 유지
+# 시각화 함수
 def plot_dataset_distribution(class_counts):
     all_classes = set()
     for split_data in class_counts.values():
@@ -218,7 +218,7 @@ def create_data_loaders(data_dir, batch_size=12, img_size=380):
     
     return dataloaders, dataset_sizes
 
-# 단순화된 손실 함수
+#손실 함수
 def hierarchical_loss(disease_pred, disease_target):
     return nn.CrossEntropyLoss()(disease_pred, disease_target)
 
@@ -312,7 +312,7 @@ def train_model(model, dataloaders, dataset_sizes, device, num_epochs=150, patie
     model.load_state_dict(best_model_wts)
     return model
 
-# 기존 시각화 함수 유지
+# 시각화 함수 
 def plot_learning_curves(train_losses, val_losses, train_accs, val_accs):
     plt.figure(figsize=(15, 6))
     
