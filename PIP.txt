@@ -1,0 +1,18 @@
+개발 환경
+OS: Windows 11
+CPU: AMD Ryzen 7 5800X
+GPU: RTX 3070 TI
+CUDA: 11.8.0
+cuDNN: 8.6.0
+Python: 3.10
+
+필수 패키지
+numpy==1.23.5
+tensorflow==2.10.0
+matplotlib==3.10.1
+seaborn==0.13.2
+scikit-learn==1.6.1
+pillow==11.2.1
+tqdm==4.67.1
+opencv-python==4.11.0.86
+pandas==2.2.3
