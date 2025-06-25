@@ -29,35 +29,9 @@ opencv-python==4.11.0.86
 pandas==2.2.3
 ```
 > 실행 명령: `pip install -r requirements.txt`
-
-#### 4. 실행 방법  
-**특정 함수부터 시작** (사용자 선호 방식) [4]:  
-```python
-# 예시: test_model 함수 실행
-from ML.detection import test_model
-test_model(
-    image_path="data/sample.jpg",  # 절대/상대 경로 지원 [4]
-    output_size=(1920, 1080)      # B2 규격 크기 조정 [3]
-)
 ```
 
-#### 5. Docker 배포 (ML 서버)  
-**Dockerfile**  
-```dockerfile
-FROM nvidia/cuda:11.8.0-base
-WORKDIR /app
-COPY . .
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD ["python", "ml-server/app.py"]
-```
-**빌드 및 실행**:  
-```bash
-docker build -t ml-server .
-docker run -p 5000:5000 --gpus all ml-server
-```
-
-#### 6. 프로젝트 구조  
+#### 4. 프로젝트 구조  
 ```plaintext
 25_capston/
 ├── ML/                  # 모델 및 분류 코드
