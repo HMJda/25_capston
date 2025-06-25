@@ -29,8 +29,7 @@ opencv-python==4.11.0.86
 pandas==2.2.3
 ```
 > 실행 명령: `pip install -r requirements.txt`
-```
-```
+
 #### 4. 프로젝트 구조  
 ```plaintext
 25_capston/
